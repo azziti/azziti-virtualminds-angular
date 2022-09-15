@@ -8,6 +8,8 @@ import { EventTypes } from 'src/app/models/event-types';
   templateUrl: './toast.component.html',
   styleUrls: ['./toast.component.css']
 })
+
+// thsi component represent a single toast alert
 export class ToastComponent implements OnInit {
 
   constructor() { }
@@ -32,15 +34,18 @@ export class ToastComponent implements OnInit {
     this.show();
   }
 
+  // show toast 
+
   show() {
     this.toast = new Toast(
       this.toastEl.nativeElement,
       this.type === EventTypes.Danger
         ? {
+          // auto close after 10s
           delay: 10000
-          // autohide: false,
         }
         : {
+        // auto close after 5s
           delay: 5000,
         }
     );
@@ -52,6 +57,8 @@ export class ToastComponent implements OnInit {
     this.toast.show();
   }
 
+
+  // delete toast
   hide() {
     this.toast.dispose();
     this.disposeEvent.emit();

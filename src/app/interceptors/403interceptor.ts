@@ -21,6 +21,8 @@ export class Error403Interceptor implements HttpInterceptor {
 
     ) {}
 
+
+    // check if jwt token is not expired
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler

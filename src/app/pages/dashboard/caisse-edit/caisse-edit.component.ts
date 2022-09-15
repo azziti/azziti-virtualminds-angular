@@ -27,6 +27,7 @@ export class CaisseEditComponent implements OnInit {
     // private location : Location
   ) { }
 
+  //we should load data when component is instaciated
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       libelle: ['', [Validators.required]],
@@ -35,11 +36,12 @@ export class CaisseEditComponent implements OnInit {
       operationDate:['', Validators.required],
     });
 
-    
+    // get route params to send a get request to the server
     this.activatedRoute.paramMap.subscribe({
       next : (value) => {
         this.id = (value as any).params.id ;
         console.log(`getting caisse with id : ${this.id} ...`);
+        //load caisse from server
         this.getCaisse(this.id);
       },
       error : (error) =>{
@@ -55,6 +57,7 @@ export class CaisseEditComponent implements OnInit {
     return this.form.controls;
   }
 
+  // get caisse by id  from server
   getCaisse(id : any){
     this.httpService.authGet(AppConstants.caisse+`/${id}`).subscribe({
       next : (data : any) => {
@@ -75,6 +78,8 @@ export class CaisseEditComponent implements OnInit {
         this.router.navigate(['/dashboard/caisses-list'], { replaceUrl: true });      }
     });
   }
+
+  // check if form is valid then submit data to the server
   submitForm() {
     this.isSubmited = true;
     if (this.form.valid) {
@@ -94,7 +99,7 @@ export class CaisseEditComponent implements OnInit {
 
   }
 
-
+// post data and handle response 
   postData(data: any) {
     this.httpService.authPut(`${AppConstants.caisse}/${this.id}`, data)
       .subscribe({
@@ -122,6 +127,7 @@ export class CaisseEditComponent implements OnInit {
       });
   }
 
+    //check for validation errors
   checkTrue(controlName : string , errorName : string) : boolean {
     return this.isSubmited && this.errorControl[controlName].errors?.[errorName]
   }

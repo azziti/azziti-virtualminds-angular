@@ -7,6 +7,8 @@ import { StorageService } from '../services/storage.service';
 @Injectable({
   providedIn: 'root'
 })
+
+// forbid authenticated users from accessing login and regsiter page 
 export class AuthGuard implements CanActivate, CanLoad {
   constructor(public storageService: StorageService, public router: Router, public authService : AuthService) { }
 

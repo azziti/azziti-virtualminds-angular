@@ -34,6 +34,9 @@ export class ScvImportComponent implements OnInit {
     return this.form.controls;
   }
 
+  // handle file change
+  // do some modification of the template
+  // change file name
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -47,6 +50,7 @@ export class ScvImportComponent implements OnInit {
     }
   }
 
+  // check if file is valid the submit
   submitForm() {
     this.isSubmited = true;
     if (this.form.valid) {
@@ -62,11 +66,15 @@ export class ScvImportComponent implements OnInit {
     }
   }
 
+
+  // send multipart post request
   postData() {
 
     this.loading  = true;
 
 
+    // add file to the request
+    // check if file is a csv
     const formData = new FormData();
     formData.append(
       'file',
@@ -75,8 +83,7 @@ export class ScvImportComponent implements OnInit {
       })
     );
 
-    console.log('formdata', formData);
-
+// send post request
     this.httpService.authPost(AppConstants.csvCaisse, formData).subscribe({
       next: (resp) => {
         console.log('uploaded data with success');
@@ -92,6 +99,7 @@ export class ScvImportComponent implements OnInit {
         console.log(`error status ${status}`);
 
         if (status == 201) {
+          // to avoid angular bug when using files a success request get caught as error  
           console.log('uploaded data with success');
           this.toastService.showSuccessToast(
             'Succes !',
@@ -99,21 +107,25 @@ export class ScvImportComponent implements OnInit {
           );
           this.router.navigate(['/dashboard/caisses-list']);
         } else if (status == 422) {
+          // file is not a csv
           this.toastService.showErrorToast(
             'Erreur de validation !',
             'SVP Selectionner un fichier (.csv)'
           );
         } else if (status == 409) {
+          // file is empty
           this.toastService.showErrorToast(
             'Problème interne',
             'Le fichier selectionné est vide'
           );
         } else if (status == 417) {
+          //file is too big
           this.toastService.showErrorToast(
             'Problème interne',
             'Le fichier selectionné est très (max 2mb)'
           );
         } else {
+          // wild cast case
           this.toastService.showErrorToast(
             'Erreur',
             'Veuillez réessayer plus tard !'
@@ -124,6 +136,7 @@ export class ScvImportComponent implements OnInit {
     });
   }
 
+      // set the default end date to this day
   checkTrue(controlName: string, errorName: string): boolean {
     return (
       this.isSubmited && this.errorControl[controlName].errors?.[errorName]

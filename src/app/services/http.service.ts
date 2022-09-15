@@ -15,6 +15,7 @@ export class HttpService {
   ) { }
 
 
+  // post without token
   post(serviceName: string, data: any) {
 
     console.log("Sending post request ...")
@@ -32,6 +33,7 @@ export class HttpService {
     return this.http.post(url, data, options);
   }
 
+  // post with jwt token  added as header
   authPost(serviceName: string, data : any) {
 
     console.log("Sending auth post request ...");
@@ -51,6 +53,7 @@ export class HttpService {
     return this.http.post(url, data, options);
   }
 
+    // get with jwt token  added as header
   authGet(serviceName: string, queryParams: HttpParams =  new HttpParams()) {
 
     console.log("Sending auth get request ...");
@@ -71,6 +74,7 @@ export class HttpService {
     return this.http.get(url, options);
   }
 
+    // put with jwt token  added as header
   authPut(serviceName: string, data = null) {
 
     console.log("Sending auth put request ..")
@@ -97,6 +101,7 @@ export class HttpService {
     return this.http.put(url, data, options);
   }
 
+    // delete with jwt token  added as header
   authDelete(serviceName: string, queryParams: HttpParams = new HttpParams()) {
 
     console.log("Sending auth delete request ..")

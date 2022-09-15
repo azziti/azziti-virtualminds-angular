@@ -1,5 +1,6 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
+//check if password and confirmation are the same
 function matchValidator(
   matchTo: string,
   reverse?: boolean,

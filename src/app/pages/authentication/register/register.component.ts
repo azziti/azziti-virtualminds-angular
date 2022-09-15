@@ -35,6 +35,8 @@ export class RegisterComponent implements OnInit {
     return this.form.controls;
   }
 
+
+  //check if form is valid then register
   submitForm() {
     this.isSubmited = true;
     if (this.form.valid) {
@@ -84,6 +86,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+    //check for validation errors
   checkTrue(controlName : string , errorName : string) : boolean {
     return this.isSubmited && this.errorControl[controlName].errors?.[errorName]
   }

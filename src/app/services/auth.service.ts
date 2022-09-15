@@ -20,10 +20,12 @@ export class AuthService {
     return this.httpService.post(AppConstants.login, data);
   }
 
+  // create a new account
   register(data: any): Observable<any> {
     return this.httpService.post(AppConstants.register, data);
   }
 
+  // clear the token
   logout() {
 
     this.storageService.removeData(AppConstants.principal);
@@ -31,18 +33,9 @@ export class AuthService {
     this.storageService.removeData(AppConstants.roles);
   }
 
-  isAdmin() {
 
-    const roles = this.storageService.loadRoles();
-    if (roles != null) {
-      for (let role of roles) {
-        if (role.authority == 'ADMIN') return true;
-      }
-    }
-
-    return false;
-  }
-
+// check if user is authenticated
+//verify if token exists in storage
   isAuthenticated() {
 
     if (this.storageService.loadToken() != null) return true;

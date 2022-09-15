@@ -133,13 +133,13 @@ export class CaissesListComponent implements OnInit {
     this.httpService.authDelete(`${AppConstants.caisse}/${id}`)
       .subscribe({
         next: (resp) => {
-          console.log('item deleted succesfully !');
-          this.toastService.showSuccessToast("Success!" , "Domaine provider deleted successfully")
+          console.log('caisse deleted succesfully !');
+          this.toastService.showSuccessToast("Succes!" , "Ppération a été bien supprimer")
           this.ngOnInit();          // this.router.navigate(['/dashboard/all-server-providers']);
         },
         error: (error) => {
           console.log('success , ', error);
-          this.toastService.showErrorToast("Failure!" , "Could not delete this domaine provider ")
+          this.toastService.showErrorToast("Oops!" , "impossible de supprimer cette operation")
         }
       })
   }

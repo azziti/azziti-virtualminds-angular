@@ -7,6 +7,8 @@ import { StorageService } from '../services/storage.service';
 @Injectable({
   providedIn: 'root'
 })
+
+// check if user is authenticated or redirect to login page
 export class DashboardGuard implements CanActivate, CanLoad {
   constructor(public storageService: StorageService, public router: Router , public authService : AuthService) { }
 

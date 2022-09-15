@@ -37,6 +37,8 @@ export class CaisseAddComponent implements OnInit {
     return this.form.controls;
   }
 
+
+  //check if form is valid then send post request
   submitForm() {
     this.isSubmited = true;
     if (this.form.valid) {
@@ -57,6 +59,9 @@ export class CaisseAddComponent implements OnInit {
   }
 
 
+  //send post request and handle response status (error or succes)
+  // on error show error toast
+  //on succes chow error toast and redirect to caisses list
   postData(data: any) {
     this.httpService.authPost(AppConstants.caisse, data)
       .subscribe({
@@ -84,6 +89,7 @@ export class CaisseAddComponent implements OnInit {
       });
   }
 
+    //check for validation errors
   checkTrue(controlName : string , errorName : string) : boolean {
     return this.isSubmited && this.errorControl[controlName].errors?.[errorName]
   }
