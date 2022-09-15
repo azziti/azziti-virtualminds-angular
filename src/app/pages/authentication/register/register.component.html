@@ -1,0 +1,106 @@
+<div class="container">
+    <div class="flex-justifycontent-center text-center" style="margin-top: 15%">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="login-title mt-2">
+              <h4>Créer un compte</h4>
+            </div>
+            <div class="login-form mt-4">
+              <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <input
+                      type="text"
+                      [ngClass]="{
+                        'form-control': true,
+                        'is-invalid': checkTrue('username', 'required')
+                      }"
+                      formControlName="username"
+                      id="username"
+                      name="username"
+                      placeholder="Nom d'utilisateur"
+                    />
+                    <span
+                    class="error invalid-feedback text-left"
+                    *ngIf="checkTrue('username', 'required')"
+                  >
+                    -Saisir un nom d'utilisateur.
+                  </span>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <input
+                      type="password"
+                      id="password"
+                      placeholder="Mot de passe"
+                      name="password"
+                      [ngClass]="{
+                        'form-control': true,
+                        'is-invalid': checkTrue('password', 'required') || checkTrue('password', 'minlength')
+                      }"
+                      formControlName="password"
+                    />
+                    <span
+                      class="error invalid-feedback text-left"
+                      *ngIf="checkTrue('password', 'required')"
+                    >
+                      -Saisir un mot de passe.
+                    </span>
+                    <span
+                      class="error invalid-feedback text-left"
+                      *ngIf="checkTrue('password', 'minlength')"
+                    >
+                    -Le mot de passe doit avoir au moins 8 caractères.
+                    </span>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <input
+                      type="password"
+                      id="repassword"
+                      placeholder="Confirmation du mot de passe"
+                      name="repassword"
+                      [ngClass]="{
+                        'form-control': true,
+                        'is-invalid': checkTrue('repassword', 'matching') || checkTrue('password', 'required') || checkTrue('password', 'minlength')
+                      }"
+                      formControlName="repassword"
+                    />
+                    <span
+                      class="error invalid-feedback text-left"
+                      *ngIf="checkTrue('repassword', 'required')"
+                    >
+                      -Saisir un mot de passe.
+                    </span>
+                    <span
+                      class="error invalid-feedback text-left"
+                      *ngIf="checkTrue('repassword', 'minlength')"
+                    >
+                    -Le mot de passe doit avoir au moins 8 caractères.
+                    </span>
+                    <span
+                    class="error invalid-feedback text-left"
+                    *ngIf="checkTrue('repassword', 'matching')"
+                    >
+                    -le mot de passe et la confirmation doivent etre identique.
+                  </span>
+                  </div>
+                </div>
+                <div class="flex-justifycontent-spacebetween">
+  
+                  <div class="form-row">
+                    <button type="submit" class="btn btn-primary m-1">
+                        S'inscrire
+                    </button>
+                    <button [routerLink]="['/authentication/login']" class="btn m-1">
+                        Se connecter
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

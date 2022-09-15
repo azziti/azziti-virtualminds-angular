@@ -1,0 +1,176 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-12">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a [routerLink]="['/dashboard/caisses-list']">Acceuil</a></li>
+          <li class="breadcrumb-item active">Brouillard de caisse</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <!-- /.card -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">
+              <i style="font-size: 0.8em" class="mr-2 fa fa-list nav-icon"></i>
+              {{ title }}
+            </h3>
+            <div class="card-tools no-print">
+              <button type="button" class="btn btn-primary bold" [routerLink]="['/dashboard/caisse-csv-import']">
+                Importer CSV
+              </button>
+
+              <button type="button" class="btn bold" [routerLink]="['/dashboard/caisse-add']">
+                + Nouveau
+              </button>
+            </div>
+          </div>
+          <!-- /.card-header -->
+
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="overflow: auto">
+              <div class="row no-print">
+                <div class="col-sm-12 col-md-3 ">
+                  <div class="dt-buttons btn-group flex-wrap">
+                    <button class="btn btn-secondary buttons-csv buttons-html5 mx-2 my-1" tabindex="0"
+                            (click)="downloadCSV()"
+                            aria-controls="example1" type="button">
+                      <span>Exporter(CSV)</span>
+                    </button>
+                    <button class="btn btn-secondary buttons-print mx-2 my-1" tabindex="0" aria-controls="example1"
+                            (click)="print()"
+                      type="button">
+                      <span>Imprimer</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-9">
+                  <div id="example1_filter" class="dataTables_filter">
+                    <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div class="form-group" style="width: 100%">
+                            <div class="input-group mb-3">
+                              De :
+                              <input [ngClass]="{
+                                    'form-control': true,
+                                    'is-invalid': checkTrue('start' , 'required')
+                                  }" id="start" name="start" formControlName="start" type="date" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="form-group" style="width: 100%">
+                            <div class="input-group mb-3">
+                              À :
+                              <input [ngClass]="{
+                                    'form-control': true,
+                                    'is-invalid': checkTrue('end' , 'required')
+                                  }" id="end" name="end" formControlName="end" type="date" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-6 col-sm-4">
+                          <button type="sumbit" class="btn btn-block btn-success btn-flat">Chercher</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Date</th>
+                        <th>Libellé</th>
+                        <th>Recettes</th>
+                        <th>Dépenses</th>
+                        <th>Solde</th>
+                        <th class="no-print">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <div *ngIf="caisses.length > 0;  then valid_content else other_content">here is ignored</div>
+                      <ng-template #valid_content>
+                        <tr *ngFor="let item of caisses , let i = index">
+                          <td>{{ i+1 }}</td>
+                          <td>{{ item.operationDate?.toISOString()?.substring(0,10) }}</td>
+                          <td>{{ item.libelle }}</td>
+                          <td>{{ '&euro; '+ (item.amountIn | number : '1.2-2') }}</td>
+                          <td>{{ '&euro; '+ (item.amountOut | number : '1.2-2') }}</td>
+                          <td [style.min-width]="'90px'">{{ '&euro; '+ (item.solde | number : '1.2-2') }}</td>
+                          <td class="text-right no-print">
+                            <a class="btn btn-info btn-sm" [routerLink]="['/dashboard/caisse-edit' , item.caisseID]">
+                              <i class="fas fa-pencil-alt">
+                              </i>
+                              Modifier
+                            </a>
+                            <a class="btn btn-danger btn-sm" href="javascript:void(0)"
+                              (click)="open(content, item.caisseID)">
+                              <i class="fas fa-trash">
+                              </i>
+                              Supprimer
+                            </a>
+                          </td>
+                        </tr>
+                      </ng-template>
+
+                      <ng-template #other_content>
+                        <tr>
+                          <td colspan="6">
+                            <div class="w-100 text-center">
+                              Pas de donnée disponible
+                            </div>
+                          </td>
+                        </tr>
+                      </ng-template>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Voulez‑vous vraiment supprimer cette opération ?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="d('Cancel clicked')">Annuler</button>
+      <button type="button" class="btn btn-danger" (click)="c('yes')">Supprimer</button>
+    </div>
+  </div>
+</ng-template>
