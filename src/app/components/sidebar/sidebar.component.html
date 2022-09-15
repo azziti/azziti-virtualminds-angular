@@ -1,62 +1,49 @@
-<aside class="no-print main-sidebar sidebar-dark-primary elevation-4" >  
-    <div class="sidebar">
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="info">
-          <a [routerLink]="['/dashboard/caisses-list']" class="d-block">
-            <span class="fa fa-home mr-2" style="color: rgb(255, 255, 255)"></span>
-            Dashboard
-          </a>
-        </div>
+<aside class="no-print main-sidebar sidebar-dark-primary elevation-4">
+  <div class="sidebar">
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="info">
+        <a [routerLink]="['/dashboard/caisses-list']" class="d-block">
+          <span class="fa fa-home mr-2" style="color: rgb(255, 255, 255)"></span>
+          Dashboard
+        </a>
       </div>
-  
-      <nav class="mt-2">
-        <ul
-          class="nav nav-pills nav-sidebar flex-column"
-          data-widget="treeview"
-          role="menu"
-          data-accordion="false"
-          ngClass="h-100"
-        >
-          <li class="nav-header">Journal</li>
-          <li class="nav-item">
-            <a href="javascript:void(0)" class="nav-link">
-              <i class="fa fa-euro-sign nav-icon"></i>
-              <p>
-                Opérations de caisse
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a
-                  [routerLink]="['/dashboard/caisse-csv-import']"
-                  class="nav-link"
-                >
-                  <i class="fa fa-cloud-upload-alt nav-icon"></i>
-                  <p>Importer CSV</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a
-                  [routerLink]="['/dashboard/caisse-add']"
-                  class="nav-link"
-                >
-                  <i class="fa fa-plus nav-icon"></i>
-                  <p>Ajouter une opération</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a  [routerLink]="['/dashboard/caisses-list']"
-                    class="nav-link">
-                  <i class="fa fa-list nav-icon"></i>
-                  <p>Voir tout</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-        </ul>
-      </nav>
     </div>
-  </aside>
-  
+
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false"
+        ngClass="h-100">
+        <li class="nav-header">Journal</li>
+        <li class="nav-item">
+          <a href="javascript:void(0)" class="nav-link">
+            <i class="fa fa-euro-sign nav-icon"></i>
+            <p>
+              Opérations de caisse
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a [routerLink]="['/dashboard/caisse-csv-import']" class="nav-link">
+                <i class="fa fa-cloud-upload-alt nav-icon"></i>
+                <p>Importer CSV</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/dashboard/caisse-add']" class="nav-link">
+                <i class="fa fa-plus nav-icon"></i>
+                <p>Ajouter une opération</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/dashboard/caisses-list']" class="nav-link">
+                <i class="fa fa-list nav-icon"></i>
+                <p>Voir tout</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+      </ul>
+    </nav>
+  </div>
+</aside>

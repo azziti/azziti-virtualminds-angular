@@ -9,8 +9,7 @@ import { CaisseAddComponent } from './caisse-add/caisse-add.component';
 import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.component';
 import { RouterModule } from '@angular/router';
 import { ScvImportComponent } from './scv-import/scv-import.component';
-
-
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -18,18 +17,17 @@ import { ScvImportComponent } from './scv-import/scv-import.component';
     CaissesListComponent,
     CaisseEditComponent,
     CaisseAddComponent,
-    ScvImportComponent
+    ScvImportComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
     ComponentsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
   ],
-   providers: [
-   ],
-  exports: [
-  ]
+  providers: [],
+  exports: [],
 })
-export class DashboardModule { }
+export class DashboardModule {}

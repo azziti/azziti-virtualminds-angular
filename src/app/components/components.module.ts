@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 import { ToasterComponent } from './toaster/toaster.component';
 import { ToastComponent } from './toast/toast.component';
 
-
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -14,16 +13,7 @@ import { ToastComponent } from './toast/toast.component';
     ToasterComponent,
     ToastComponent,
   ],
-  imports: [
-
-    CommonModule,
-    RouterModule
-  ],
-  exports: [
-    HeaderComponent,
-    SidebarComponent,
-    ToasterComponent,
-
-  ]
+  imports: [CommonModule, RouterModule],
+  exports: [HeaderComponent, SidebarComponent, ToasterComponent],
 })
-export class ComponentsModule { }
+export class ComponentsModule {}

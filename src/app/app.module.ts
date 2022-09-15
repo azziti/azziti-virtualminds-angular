@@ -1,6 +1,6 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule , ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
@@ -11,9 +11,7 @@ import { ComponentsModule } from './components/components.module';
 import { Error403Interceptor } from './interceptors/403interceptor';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -23,14 +21,11 @@ import { Error403Interceptor } from './interceptors/403interceptor';
     RouterModule,
     DashboardModule,
     AuthenticationModule,
-    ComponentsModule
-
+    ComponentsModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: Error403Interceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: Error403Interceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
-
-
+export class AppModule {}

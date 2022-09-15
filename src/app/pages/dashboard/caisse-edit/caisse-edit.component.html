@@ -1,175 +1,121 @@
 <section class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-12">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a [routerLink]="['/dashboard/caisses-list']">Acceuil</a></li>
-            <li class="breadcrumb-item active">Modifier opération</li>
-          </ol>
-        </div>
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-12">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a [routerLink]="['/dashboard/caisses-list']">Acceuil</a></li>
+          <li class="breadcrumb-item active">Modifier opération</li>
+        </ol>
       </div>
     </div>
-    <!-- /.container-fluid -->
-  </section>
-  
-  <section class="content">
-    <div class="container-fluid">
-      <!-- SELECT2 EXAMPLE -->
-      <div class="card card-default">
-        <div class="card-header">
-          <h3 class="card-title">
-            <i style="font-size: 0.8em" class="mr-2 fa fa-plus nav-icon"></i>
-            Modifier Brouillard de caisse.
-          </h3>
-          <div class="card-tools">
-            <button type="button" class="btn btn-primary bold" [routerLink]="['/dashboard/caisse-csv-import']">
-              Importer CSV
-            </button>
+  </div>
+  <!-- /.container-fluid -->
+</section>
 
-            <button type="button" class="btn bold" [routerLink]="['/dashboard/caisses-list']">
-              Voir tout
-            </button>
-          </div>
+<section class="content">
+  <div class="container-fluid">
+    <!-- SELECT2 EXAMPLE -->
+    <div class="card card-default">
+      <div class="card-header">
+        <h3 class="card-title">
+          <i style="font-size: 0.8em" class="mr-2 fa fa-plus nav-icon"></i>
+          Modifier Brouillard de caisse.
+        </h3>
+        <div class="card-tools">
+          <button type="button" class="btn btn-primary bold" [routerLink]="['/dashboard/caisse-csv-import']">
+            Importer CSV
+          </button>
+
+          <button type="button" class="btn bold" [routerLink]="['/dashboard/caisses-list']">
+            Voir tout
+          </button>
         </div>
-        <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-6">
-                <!-- /.form-group -->
-                <div class="form-group" style="width: 100%">
-                  <label for="libelle">Libellé </label>
-                  <input
-                    type="text"
-                    [ngClass]="{
+      </div>
+      <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <!-- /.form-group -->
+              <div class="form-group" style="width: 100%">
+                <label for="libelle">Libellé </label>
+                <input type="text" [ngClass]="{
                       'form-control': true,
                       'is-invalid': checkTrue('libelle' , 'required')
-                    }"
-                    id="libelle"
-                    name="libelle"
-                    formControlName="libelle"
-                    placeholder="Saisir un libellé"
-                  />
-                  <span
-                    class="error invalid-feedback"
-                    *ngIf="checkTrue('libelle' , 'required')"
-                  >
-                    Saisir un libellé
-                  </span>
-                </div>
-  
-                <div class="form-group" style="width: 100%">
-                  <label for="operationDate">Date d'operation</label>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"
-                        ><i class="far fa-calendar-alt"></i
-                      ></span>
-                    </div>
-                    <input
-                      type="date"
-                      [ngClass]="{
+                    }" id="libelle" name="libelle" formControlName="libelle" placeholder="Saisir un libellé" />
+                <span class="error invalid-feedback" *ngIf="checkTrue('libelle' , 'required')">
+                  Saisir un libellé
+                </span>
+              </div>
+
+              <div class="form-group" style="width: 100%">
+                <label for="operationDate">Date d'operation</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                  </div>
+                  <input type="date" [ngClass]="{
                         'form-control': true,
                         'is-invalid': checkTrue('operationDate' , 'required')
-                      }"
-                      placeholder="Date d'operation"
-                      name="operationDate"
-                      id="operationDate"
-                      formControlName="operationDate"
-                    />
-                    <span
-                      class="error invalid-feedback"
-                      *ngIf="checkTrue('operationDate','required')"
-                    >
-                      La date d'operation est obligatoire.
-                    </span>
-                  </div>
+                      }" placeholder="Date d'operation" name="operationDate" id="operationDate"
+                    formControlName="operationDate" />
+                  <span class="error invalid-feedback" *ngIf="checkTrue('operationDate','required')">
+                    La date d'operation est obligatoire.
+                  </span>
                 </div>
-                <!-- /.form-group -->
               </div>
-              <!-- /.col -->
-              <div class="col-md-6">
-                <!-- /.form-group -->
-                <div class="form-group" style="width: 100%">
-                  <label for="amountIn">Recettes</label>
-                  <input
-                    type="text"
-                    [ngClass]="{
+              <!-- /.form-group -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-6">
+              <!-- /.form-group -->
+              <div class="form-group" style="width: 100%">
+                <label for="amountIn">Recettes</label>
+                <input type="text" [ngClass]="{
                       'form-control': true,
                       'is-invalid': checkTrue('amountIn','required') || checkTrue('amountIn','min') || checkTrue('amountIn','pattern')
-                    }"
-                    id="amountIn"
-                    name="amountIn"
-                    placeholder="Recettes"
-                    formControlName="amountIn"
-                  />
-                  <span
-                    class="error invalid-feedback"
-                    *ngIf="checkTrue('amountIn','required')"
-                  >
+                    }" id="amountIn" name="amountIn" placeholder="Recettes" formControlName="amountIn" />
+                <span class="error invalid-feedback" *ngIf="checkTrue('amountIn','required')">
                   Vous devez spécifier les recettes
-                  </span>
-                  <span
-                    class="error invalid-feedback"
-                    *ngIf="checkTrue('amountIn','min')"
-                  >
-                      Cette valeur ne peut pas être négative .
-                  </span>
-                  <span
-                  class="error invalid-feedback"
-                  *ngIf="checkTrue('amountIn','pattern')"
-                >
-                Fomat invalide ex : 103.41 (utiliser point en place de virgule )
                 </span>
-                </div>
+                <span class="error invalid-feedback" *ngIf="checkTrue('amountIn','min')">
+                  Cette valeur ne peut pas être négative .
+                </span>
+                <span class="error invalid-feedback" *ngIf="checkTrue('amountIn','pattern')">
+                  Fomat invalide ex : 103.41 (utiliser point en place de virgule )
+                </span>
+              </div>
 
-                <div class="form-group" style="width: 100%">
-                    <label for="amountOut">Dépenses</label>
-                    <input
-                      type="text"
-                      [ngClass]="{
+              <div class="form-group" style="width: 100%">
+                <label for="amountOut">Dépenses</label>
+                <input type="text" [ngClass]="{
                         'form-control': true,
                         'is-invalid': checkTrue('amountOut','required') || checkTrue('amountOut','min') || checkTrue('amountOut','pattern')
-                      }"
-                      id="amountOut"
-                      name="amountIn"
-                      placeholder="Dépenses"
-                      formControlName="amountOut"
-                    />
-                    <span
-                      class="error invalid-feedback"
-                      *ngIf="checkTrue('amountOut','required')"
-                    >
-                      Vous devez spécifier les dépenses
-                    </span>
-                    <span
-                      class="error invalid-feedback"
-                      *ngIf="checkTrue('amountOut','min')"
-                    >
-                      Cette valeur ne peut pas être négative .
-                    </span>
-                    <span
-                    class="error invalid-feedback"
-                    *ngIf="checkTrue('amountOut','pattern')"
-                  >
+                      }" id="amountOut" name="amountIn" placeholder="Dépenses" formControlName="amountOut" />
+                <span class="error invalid-feedback" *ngIf="checkTrue('amountOut','required')">
+                  Vous devez spécifier les dépenses
+                </span>
+                <span class="error invalid-feedback" *ngIf="checkTrue('amountOut','min')">
+                  Cette valeur ne peut pas être négative .
+                </span>
+                <span class="error invalid-feedback" *ngIf="checkTrue('amountOut','pattern')">
                   Fomat invalide ex : 103.41 (utiliser point en place de virgule )
-                  </span>
-                  </div>
-                <!-- /.form-group -->
+                </span>
               </div>
-              <!-- /.col -->
+              <!-- /.form-group -->
             </div>
-  
-            <!-- /.row -->
+            <!-- /.col -->
           </div>
-          <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Modifier</button>
-          </div>
-        </form>
-  
-        <!-- /.card-body -->
-      </div>
-      <!-- /.card -->
+
+          <!-- /.row -->
+        </div>
+        <div class="card-footer">
+          <button type="submit" class="btn btn-primary">Modifier</button>
+        </div>
+      </form>
+
+      <!-- /.card-body -->
     </div>
-    <!-- /.container-fluid -->
-  </section>
-  
+    <!-- /.card -->
+  </div>
+  <!-- /.container-fluid -->
+</section>

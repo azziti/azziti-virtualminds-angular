@@ -6,17 +6,19 @@ import { ToastService } from 'src/app/services/toast.service';
 @Component({
   selector: 'app-toaster',
   templateUrl: './toaster.component.html',
-  styleUrls: ['./toaster.component.css']
+  styleUrls: ['./toaster.component.css'],
 })
 
-//this component is our toast container 
+//this component is our toast container
 // it holds our toasts alert one on the top of the other
 export class ToasterComponent implements OnInit {
+  currentToasts: ToastEvent[] = [];
+  subscription!: Subscription;
 
-  currentToasts : ToastEvent[] = [];
-  subscription !: Subscription ;
-
-  constructor(private toastService: ToastService, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private toastService: ToastService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.subscribeToToasts();
@@ -25,7 +27,6 @@ export class ToasterComponent implements OnInit {
   // subscribe to catch toast events
   subscribeToToasts() {
     this.subscription = this.toastService.toastEvents.subscribe((toasts) => {
-
       //add new toast
       const currentToast: ToastEvent = {
         type: toasts.type,
@@ -37,11 +38,9 @@ export class ToasterComponent implements OnInit {
     });
   }
 
-
   //dispose toast
   dispose(index: number) {
     this.currentToasts.splice(index, 1);
     this.cdr.detectChanges();
   }
-
 }

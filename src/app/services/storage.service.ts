@@ -4,11 +4,10 @@ import { AppConstants } from '../config/app-constants';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StorageService {
-
-  constructor() { }
+  constructor() {}
 
   // crypt and save an item to local storage
   saveData(key: string, value: any) {
@@ -18,17 +17,16 @@ export class StorageService {
   // get and decrypt an item from local storage
   getData(key: string) {
     let data = localStorage.getItem(key);
-    if(data != null) {
+    if (data != null) {
       return JSON.parse(this.decrypt(data));
     }
-    return null
+    return null;
   }
 
   //delete item from local storage
   removeData(key: string) {
     localStorage.removeItem(key);
   }
-
 
   // clear local storage
   clearData() {
@@ -42,44 +40,43 @@ export class StorageService {
 
   //decode data
   private decrypt(txtToDecrypt: string) {
-    return CryptoJS.AES.decrypt(txtToDecrypt, AppConstants.encryptionKey).toString(CryptoJS.enc.Utf8);
+    return CryptoJS.AES.decrypt(
+      txtToDecrypt,
+      AppConstants.encryptionKey
+    ).toString(CryptoJS.enc.Utf8);
   }
 
-
   //decode jwt token and save its elements
-  saveToken( jwt : string) {
-
+  saveToken(jwt: string) {
     this.saveData(AppConstants.token, jwt);
     let jwtHelper = new JwtHelperService();
-    const roles : Array<any> = jwtHelper.decodeToken(jwt).roles;
-    this.saveData(AppConstants.roles , roles);
-    const principal : any = jwtHelper.decodeToken(jwt).sub;
+    const roles: Array<any> = jwtHelper.decodeToken(jwt).roles;
+    this.saveData(AppConstants.roles, roles);
+    const principal: any = jwtHelper.decodeToken(jwt).sub;
     this.saveData(AppConstants.principal, principal);
-
   }
 
   //get user credentials from local storage
   loadCredentials() {
-
     return {
-      token : this.getData(AppConstants.token),
-      roles : this.getData(AppConstants.roles),
-      principal : this.getData(AppConstants.principal)
-    }
+      token: this.getData(AppConstants.token),
+      roles: this.getData(AppConstants.roles),
+      principal: this.getData(AppConstants.principal),
+    };
   }
 
   // load user token
-  loadToken(){
+  loadToken() {
     return this.loadCredentials().token;
   }
 
   // load user roles
-  loadRoles(){
+  loadRoles() {
     return this.loadCredentials().roles;
   }
 
   //load user infos
-  loadPrincipal(){
+  loadPrincipal() {
     return this.loadCredentials().principal;
   }
 }

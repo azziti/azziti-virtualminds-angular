@@ -17,12 +17,10 @@ export class Error403Interceptor implements HttpInterceptor {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private toastService : ToastService
+    private toastService: ToastService
+  ) {}
 
-    ) {}
-
-
-    // check if jwt token is not expired
+  // check if jwt token is not expired
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -36,8 +34,10 @@ export class Error403Interceptor implements HttpInterceptor {
               (err.status === 401 || err.status === 403) &&
               this.router.routerState.snapshot.url != '/authentication/login'
             ) {
-
-              this.toastService.showErrorToast("Session expirée !" , "Connectez-vous pour continuer !");
+              this.toastService.showErrorToast(
+                'Session expirée !',
+                'Connectez-vous pour continuer !'
+              );
               this.authService.logout();
               this.router.navigate(['/authentication/login']);
             }

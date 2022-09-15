@@ -1,4 +1,12 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { Toast } from 'bootstrap';
 import { fromEvent, take } from 'rxjs';
 import { EventTypes } from 'src/app/models/event-types';
@@ -6,13 +14,12 @@ import { EventTypes } from 'src/app/models/event-types';
 @Component({
   selector: 'app-toast',
   templateUrl: './toast.component.html',
-  styleUrls: ['./toast.component.css']
+  styleUrls: ['./toast.component.css'],
 })
 
 // thsi component represent a single toast alert
 export class ToastComponent implements OnInit {
-
-  constructor() { }
+  constructor() {}
 
   @Output() disposeEvent = new EventEmitter();
 
@@ -34,20 +41,19 @@ export class ToastComponent implements OnInit {
     this.show();
   }
 
-  // show toast 
-
+  // show toast
   show() {
     this.toast = new Toast(
       this.toastEl.nativeElement,
       this.type === EventTypes.Danger
         ? {
-          // auto close after 10s
-          delay: 10000
-        }
+            // auto close after 10s
+            delay: 10000,
+          }
         : {
-        // auto close after 5s
-          delay: 5000,
-        }
+            // auto close after 5s
+            delay: 5000,
+          }
     );
 
     fromEvent(this.toastEl.nativeElement, 'hidden.bs.toast')
@@ -56,7 +62,6 @@ export class ToastComponent implements OnInit {
 
     this.toast.show();
   }
-
 
   // delete toast
   hide() {

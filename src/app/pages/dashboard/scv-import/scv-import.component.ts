@@ -15,7 +15,7 @@ export class ScvImportComponent implements OnInit {
   form!: FormGroup;
   isSubmited: boolean = false;
   title: String = 'Ajouter un fichier';
-  loading : boolean = false;
+  loading: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -66,12 +66,9 @@ export class ScvImportComponent implements OnInit {
     }
   }
 
-
   // send multipart post request
   postData() {
-
-    this.loading  = true;
-
+    this.loading = true;
 
     // add file to the request
     // check if file is a csv
@@ -83,7 +80,7 @@ export class ScvImportComponent implements OnInit {
       })
     );
 
-// send post request
+    // send post request
     this.httpService.authPost(AppConstants.csvCaisse, formData).subscribe({
       next: (resp) => {
         console.log('uploaded data with success');
@@ -92,14 +89,14 @@ export class ScvImportComponent implements OnInit {
           "La liste s'est bien ajoutée"
         );
         this.router.navigate(['/dashboard/caisses-list']);
-        this.loading  = false;
+        this.loading = false;
       },
       error: (error) => {
         const status = error.status;
         console.log(`error status ${status}`);
 
         if (status == 201) {
-          // to avoid angular bug when using files a success request get caught as error  
+          // to avoid angular bug when using files a success request get caught as error
           console.log('uploaded data with success');
           this.toastService.showSuccessToast(
             'Succes !',
@@ -131,12 +128,12 @@ export class ScvImportComponent implements OnInit {
             'Veuillez réessayer plus tard !'
           );
         }
-        this.loading  = false;
+        this.loading = false;
       },
     });
   }
 
-      // set the default end date to this day
+  // set the default end date to this day
   checkTrue(controlName: string, errorName: string): boolean {
     return (
       this.isSubmited && this.errorControl[controlName].errors?.[errorName]

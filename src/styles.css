@@ -1,24 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
-.flex-justifycontent-spacebetween{
-    display: flex;
-    justify-content: space-between;
-  }
-  .flex-justifycontent-center{
-    display: flex;
-    justify-content: center;
-  }
-  
-  html, body { height: 100%; }
-  body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-  @media print
-{    
-    .no-print, .no-print *
-    {
-        display: none !important;
-    }
-    ::-webkit-scrollbar {
-      display: none;
-    }
+.flex-justifycontent-spacebetween {
+  display: flex;
+  justify-content: space-between;
 }
-  
+.flex-justifycontent-center {
+  display: flex;
+  justify-content: center;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+@media print {
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}

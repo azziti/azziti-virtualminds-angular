@@ -7,20 +7,24 @@ import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.co
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ScvImportComponent } from './scv-import/scv-import.component';
 
-const routes: Routes = [{
-  path: '', component: DashboardLayoutComponent, children: [
-    { path: '', redirectTo:'caisses-list', pathMatch:"full" },
-    { path: 'caisses-list', component: CaissesListComponent },
-    { path: 'caisse-add', component: CaisseAddComponent },
-    { path: 'caisse-edit/:id', component: CaisseEditComponent },
-    { path: 'caisse-csv-import', component: ScvImportComponent },
-    { path: 'error-404', component: NotFoundComponent },
-    { path: '**' , redirectTo:'error-404',pathMatch:'full'}
-  ]
-}];
+const routes: Routes = [
+  {
+    path: '',
+    component: DashboardLayoutComponent,
+    children: [
+      { path: '', redirectTo: 'caisses-list', pathMatch: 'full' },
+      { path: 'caisses-list', component: CaissesListComponent },
+      { path: 'caisse-add', component: CaisseAddComponent },
+      { path: 'caisse-edit/:id', component: CaisseEditComponent },
+      { path: 'caisse-csv-import', component: ScvImportComponent },
+      { path: 'error-404', component: NotFoundComponent },
+      { path: '**', redirectTo: 'error-404', pathMatch: 'full' },
+    ],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class DashboardRoutingModule { }
+export class DashboardRoutingModule {}

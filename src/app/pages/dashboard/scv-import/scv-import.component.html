@@ -1,82 +1,70 @@
 <section class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-12">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a [routerLink]="['/dashboard/caisses-list']">Acceuil</a></li>
-            <li class="breadcrumb-item active">Importation des opération</li>
-          </ol>
-        </div>
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-12">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a [routerLink]="['/dashboard/caisses-list']">Acceuil</a></li>
+          <li class="breadcrumb-item active">Importation des opération</li>
+        </ol>
       </div>
     </div>
-    <!-- /.container-fluid -->
-  </section>
-  
-  <section class="content">
-    <div class="container-fluid">
-      <!-- SELECT2 EXAMPLE -->
-      <div class="card card-default">
-        <div class="card-header">
-          <h3 class="card-title">
-            <i style="font-size: 0.8em" class="mr-2 fa fa-plus nav-icon"></i>
-            Importer Brouillard de caisse.
-          </h3>
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool bold"  [routerLink]="['/dashboard/caisses-list']">
-              <p class="h6">Voir tout</p>
-            </button>
-          </div>
-        </div>
-        <form [formGroup]="form" (ngSubmit)="submitForm()" enctype="multipart/form-data" novalidate>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-6">
-                <!-- /.form-group -->
+  </div>
+  <!-- /.container-fluid -->
+</section>
 
-                  <div class="form-group">
-                    <label for="file">Selectionner un fichier csv</label>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input  type="file"
-                                class="" 
-                                id="file"
-                                type="file"
-                                [ngClass]="{
+<section class="content">
+  <div class="container-fluid">
+    <!-- SELECT2 EXAMPLE -->
+    <div class="card card-default">
+      <div class="card-header">
+        <h3 class="card-title">
+          <i style="font-size: 0.8em" class="mr-2 fa fa-plus nav-icon"></i>
+          Importer Brouillard de caisse.
+        </h3>
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool bold" [routerLink]="['/dashboard/caisses-list']">
+            <p class="h6">Voir tout</p>
+          </button>
+        </div>
+      </div>
+      <form [formGroup]="form" (ngSubmit)="submitForm()" enctype="multipart/form-data" novalidate>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <!-- /.form-group -->
+
+              <div class="form-group">
+                <label for="file">Selectionner un fichier csv</label>
+                <div class="input-group">
+                  <div class="custom-file">
+                    <input type="file" class="" id="file" type="file" [ngClass]="{
                                   'custom-file-input' : true,
                                   'form-control': true,
                                   'is-invalid': checkTrue('file','required')
-                                }"
-                                placeholder="Dépenses"
-                                formControlName="file"
-                                (change)="onFileChange($event)"
-                        >
-                        <label class="custom-file-label" for="file">{{ title }}</label>
-                      </div>
-                      <span
-                      class="error invalid-feedback"
-                      style="display: inline;"
-                      *ngIf="checkTrue('file','required')"
-                    >
-                      Vous devez selectionner un fichier
-                    </span>
-                    </div>
+                                }" placeholder="Dépenses" formControlName="file" (change)="onFileChange($event)">
+                    <label class="custom-file-label" for="file">{{ title }}</label>
                   </div>
-                <!-- /.form-group -->
+                  <span class="error invalid-feedback" style="display: inline;" *ngIf="checkTrue('file','required')">
+                    Vous devez selectionner un fichier
+                  </span>
+                </div>
               </div>
-              <!-- /.col -->
+              <!-- /.form-group -->
             </div>
-  
-            <!-- /.row -->
+            <!-- /.col -->
           </div>
-          <div class="card-footer">
-            <button type="submit" [disabled]="loading" class="btn btn-primary">{{ loading ? "Chargement ..." : "Ajouter" }}</button>
-          </div>
-        </form>
-  
-        <!-- /.card-body -->
-      </div>
-      <!-- /.card -->
+
+          <!-- /.row -->
+        </div>
+        <div class="card-footer">
+          <button type="submit" [disabled]="loading" class="btn btn-primary">{{ loading ? "Chargement ..." : "Ajouter"
+            }}</button>
+        </div>
+      </form>
+
+      <!-- /.card-body -->
     </div>
-    <!-- /.container-fluid -->
-  </section>
-  
+    <!-- /.card -->
+  </div>
+  <!-- /.container-fluid -->
+</section>

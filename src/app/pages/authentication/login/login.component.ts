@@ -33,11 +33,12 @@ export class LoginComponent implements OnInit {
     return this.form.controls;
   }
 
+  //check if form is valid then submit
   submitForm() {
     this.isSubmited = true;
     if (this.form.valid) {
       console.log('Front end validation succeeded !');
-      this.login(this.form.value)
+      this.login(this.form.value);
     } else {
       console.log('Front end validation failed !');
       console.log('Please provide all the required values!');
@@ -48,6 +49,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  //send login request to the server
   login(user: any) {
     console.log('trying to connect ...');
     this.auth.login(user).subscribe({
@@ -64,21 +66,29 @@ export class LoginComponent implements OnInit {
         }
       },
       error: (error) => {
-
         console.log('Connexion with the server failed !');
         const status = error.status;
-        console.log(`error status ${status}`)
+        console.log(`error status ${status}`);
 
-        if(status == 403){
-          this.toastService.showErrorToast("Données invalides" , "Nom d'utilisateur ou mot de passe incorrect" );
+        if (status == 403) {
+          this.toastService.showErrorToast(
+            'Données invalides',
+            "Nom d'utilisateur ou mot de passe incorrect"
+          );
         } else {
-          this.toastService.showErrorToast("Erreur" , "Veuillez réessayer plus tard. ");
+          this.toastService.showErrorToast(
+            'Erreur',
+            'Veuillez réessayer plus tard. '
+          );
         }
       },
     });
   }
 
-  checkTrue(controlName : string , errorName : string) : boolean {
-    return this.isSubmited && this.errorControl[controlName].errors?.[errorName]
+  //check for validation errors
+  checkTrue(controlName: string, errorName: string): boolean {
+    return (
+      this.isSubmited && this.errorControl[controlName].errors?.[errorName]
+    );
   }
 }

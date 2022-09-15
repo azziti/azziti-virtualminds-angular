@@ -6,22 +6,15 @@ import { AppConstants } from 'src/app/config/app-constants';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
+  constructor(public authService: AuthService, private router: Router) {}
 
-  constructor(
-    public authService : AuthService ,
-    private router : Router
-  ) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-
-
-  logOut(){
+  logOut() {
     this.authService.logout();
     this.router.navigate(['/authentication/login']);
   }
-
 }

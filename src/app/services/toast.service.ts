@@ -4,10 +4,11 @@ import { EventTypes } from '../models/event-types';
 import { ToastEvent } from '../models/toast-event';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class ToastService {
 
+// this class contains methods that add toast alerts to the app main toaster
+export class ToastService {
   toastEvents: Observable<ToastEvent>;
   private _toastEvents = new Subject<ToastEvent>();
 
@@ -31,7 +32,6 @@ export class ToastService {
     });
   }
 
- 
   showWarningToast(title: string, message: string) {
     this._toastEvents.next({
       message,
@@ -39,7 +39,6 @@ export class ToastService {
       type: EventTypes.Warning,
     });
   }
-
 
   showErrorToast(title: string, message: string) {
     this._toastEvents.next({

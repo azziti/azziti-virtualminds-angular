@@ -3,30 +3,25 @@ import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
 import { environment } from 'src/environments/environment';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HttpService {
-
   constructor(
     private http: HttpClient,
     private storageService: StorageService
-  ) { }
-
+  ) {}
 
   // post without token
   post(serviceName: string, data: any) {
+    console.log('Sending post request ...');
 
-    console.log("Sending post request ...")
-
-    const headers = new HttpHeaders()
-      .set('Accept', 'application/json');
+    const headers = new HttpHeaders().set('Accept', 'application/json');
 
     const options = {
       headers,
       withCredintials: false,
-      observe: "response" as 'body'
+      observe: 'response' as 'body',
     };
     const url = environment.apiUrl + serviceName;
 
@@ -34,9 +29,8 @@ export class HttpService {
   }
 
   // post with jwt token  added as header
-  authPost(serviceName: string, data : any) {
-
-    console.log("Sending auth post request ...");
+  authPost(serviceName: string, data: any) {
+    console.log('Sending auth post request ...');
 
     const token: string = this.storageService.loadToken();
     const url = environment.apiUrl + serviceName;
@@ -47,16 +41,15 @@ export class HttpService {
     const options = {
       headers,
       withCredintials: false,
-      observe: "response" as 'body'
+      observe: 'response' as 'body',
     };
 
     return this.http.post(url, data, options);
   }
 
-    // get with jwt token  added as header
-  authGet(serviceName: string, queryParams: HttpParams =  new HttpParams()) {
-
-    console.log("Sending auth get request ...");
+  // get with jwt token  added as header
+  authGet(serviceName: string, queryParams: HttpParams = new HttpParams()) {
+    console.log('Sending auth get request ...');
 
     const token: string = this.storageService.loadToken();
     const url = environment.apiUrl + serviceName;
@@ -67,45 +60,40 @@ export class HttpService {
     const options = {
       headers,
       withCredintials: false,
-      observe: "response" as 'body',
-      params: queryParams
+      observe: 'response' as 'body',
+      params: queryParams,
     };
 
     return this.http.get(url, options);
   }
 
-    // put with jwt token  added as header
+  // put with jwt token  added as header
   authPut(serviceName: string, data = null) {
-
-    console.log("Sending auth put request ..")
+    console.log('Sending auth put request ..');
 
     const token: string = this.storageService.loadToken();
     const url = environment.apiUrl + serviceName;
     const headers = new HttpHeaders({
-      'Accept': 'application/json',
-      'Authorization': `Bearer ${token}`,
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
       'Access-Control-Allow-Origin': '*',
       'Cross-Origin': 'true',
-      "Access-Control-Allow-Headers": "*",
+      'Access-Control-Allow-Headers': '*',
       'Access-Control-Request-Methods': '*',
-
-    })
-
+    });
 
     const options = {
       headers,
       withCredintials: false,
-      observe: "response" as 'body',
+      observe: 'response' as 'body',
     };
 
     return this.http.put(url, data, options);
   }
 
-    // delete with jwt token  added as header
+  // delete with jwt token  added as header
   authDelete(serviceName: string, queryParams: HttpParams = new HttpParams()) {
-
-    console.log("Sending auth delete request ..")
-
+    console.log('Sending auth delete request ..');
 
     const token: string = this.storageService.loadToken();
     const url = environment.apiUrl + serviceName;
@@ -116,8 +104,8 @@ export class HttpService {
     const options = {
       headers,
       withCredintials: false,
-      observe: "response" as 'body',
-      params: queryParams
+      observe: 'response' as 'body',
+      params: queryParams,
     };
 
     return this.http.delete(url, options);
